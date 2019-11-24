@@ -1,8 +1,11 @@
 package com.bar.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "employees")
@@ -12,6 +15,8 @@ public class Employee {
 	private long id;
 	private String first_name;
 	private String last_name;
+	@OneToMany(mappedBy="employee")
+	private List<Job> jobList;
 	public Employee() {
 		super();
 	}
