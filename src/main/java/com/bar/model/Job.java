@@ -3,10 +3,14 @@ package com.bar.model;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "jobs")
 public class Job {
 	@Id
 	@GeneratedValue
@@ -14,8 +18,8 @@ public class Job {
 	private String description;
 	private LocalDateTime dueDate;
 	private LocalDateTime startDate;
-	@ManyToOne(mappedBy="")
-	private long cart_id;
+//	@ManyToOne(mappedBy="")
+//	private long cart_id;
 	public Job() {
 		
 	}

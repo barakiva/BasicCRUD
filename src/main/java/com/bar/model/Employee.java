@@ -15,8 +15,8 @@ public class Employee {
 	private long id;
 	private String first_name;
 	private String last_name;
-	@OneToMany(mappedBy="employee")
-	private List<Job> jobList;
+//	@OneToMany(mappedBy="employee")
+//	private List<Job> jobList;
 	public Employee() {
 		super();
 	}
