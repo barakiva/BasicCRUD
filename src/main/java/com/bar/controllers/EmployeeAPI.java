@@ -16,7 +16,7 @@ import com.bar.persistence.DBGeneration;
 import com.bar.services.EmployeeService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/employees")
 public class EmployeeAPI {
 	@Autowired
 	private EmployeeService empService;
@@ -27,16 +27,18 @@ public class EmployeeAPI {
 	public void initApi() {
 		this.test();
 	}
+	@GetMapping("/")
+	public String homePage() {
+		return "welcome home";
+	}
 	
+	//Create
 	@GetMapping("/init")
 	public String test() {
 		System.out.println("test alive");
-		dbGen.createDB(100);
-		return Long.toString(empService.countEntries());
-	}
-
-	@GetMapping("/count-entries")
-	public String countEntries() {
+		if(empService.countEntries() < 1000) {
+			dbGen.createDB(100);
+		}
 		return Long.toString(empService.countEntries());
 	}
 	@PostMapping("/add-employee")
@@ -45,10 +47,22 @@ public class EmployeeAPI {
 
 		empService.addEmployee(new Employee(first_name, last_name));
 	}
+	//Read
+	@GetMapping("/count-entries")
+	public String countEntries() {
+		return Long.toString(empService.countEntries());
+	}
 	@GetMapping("/find-employee")
 	public Employee findEmployee(@RequestParam("id") long id) {
 		return empService.findEmployee(id).get();
 	}
+	
+	@GetMapping("/num-arr-index")
+	public int getNumArrNumber(@RequestParam("employee_id") long id,
+							   @RequestParam("index") int index) {
+		return empService.findEmployee(1).get().getNum_arr()[index];
+	}
+	//Update
 	@PostMapping("/update-employee")
 	public void updateEmployee(@RequestParam("id") long id,
 								@RequestParam(name = "first_name", required=false) String first_name,
@@ -56,6 +70,7 @@ public class EmployeeAPI {
 		
 		empService.updateEmployee(id, new Employee(first_name, last_name));
 	}
+	//Delete
 	@DeleteMapping("/delete-employee")
 	public String deleteEmployee(@RequestParam("id") long id) {
 		empService.deleteEmployee(id);

@@ -12,6 +12,7 @@ public class Employee {
 	private long id;
 	private String first_name;
 	private String last_name;
+	private int[] num_arr;
 	public Employee() {
 		super();
 	}
@@ -36,6 +37,18 @@ public class Employee {
 	}
 	public long getId() {
 		return id;
+	}
+
+	public int[] getNum_arr() {
+		return num_arr;
+	}
+
+	public void setNum_arr(int[] num_arr) {
+		this.num_arr = num_arr;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }
